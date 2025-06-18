@@ -16,11 +16,11 @@
         </div> 
         <div class="col-12">
             <label for="kelurahan" class="form-label">Kelurahan</label>
-            <strong>select kelurahan</strong>
+            <select class="form-control" id="kelurahan" name="kelurahan" required></select>
         </div>
         <div class="col-12">
             <label for="layanan" class="form-label">Layanan</label>
-            <strong>select layanan</strong>
+            <select class="form-control" id="layanan" name="layanan" required></select>
         </div>
         <div class="col-12">
             <label for="ongkir" class="form-label">Ongkir</label>
