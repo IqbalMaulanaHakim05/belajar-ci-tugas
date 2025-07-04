@@ -14,7 +14,6 @@ class AuthController extends BaseController
 {
     helper('form');
     $this->user = new UserModel();
-    
 }
 
 public function login()

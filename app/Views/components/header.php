@@ -16,6 +16,21 @@
   </form>
 </div><!-- End Search Bar -->
 
+ <?php
+  $session = session();
+  if (session()->has('nominalDiskon')) {
+    $nominalDiskon = $session->get('nominalDiskon');
+    ?>
+    <div
+      class="diskon-notification d-flex align-items-center justify-content-center me-auto ms-3 px-3 py-2 rounded text-white"
+      style="background-color: #06923E; font-weight: bold; font-size: 0.9rem;">
+      Hari ini ada diskon <?= $nominalDiskon ?> per item
+    </div>
+    <?php
+  }
+  ?>
+  <!-- End Notification Diskon -->
+
 <nav class="header-nav ms-auto">
   <ul class="d-flex align-items-center">
 
