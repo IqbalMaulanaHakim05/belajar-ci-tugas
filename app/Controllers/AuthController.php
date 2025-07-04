@@ -33,13 +33,16 @@ public function login()
                     'isLoggedIn' => TRUE
                 ]);
 
-                 $diskonModel = new DiskonModel();
-                    $today = date('Y-m-d');
+                 //Logika diskon mulai
+                        $today = date('Y-m-d');
+                        $diskonToday = $this->diskonModel->where('tanggal', $today)->first();
 
-                    $diskon = $diskonModel->where('tanggal', $today)->first();
-                    if ($diskon) {
-                        session()->set('diskon_nominal', $diskon['nominal']);
-                    }
+                        if ($diskonToday) {
+                            session()->set('nominalDiskon', $diskonToday['nominal']);
+                        } else {
+                            session()->remove('nominalDiskon');
+                            session()->setFlashdata('info', 'tidak ada diskon hari ini');
+                        }
 
                 return redirect()->to(base_url(''));
             } else {
