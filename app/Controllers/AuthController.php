@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UserModel;
-
+use App\Models\DiskonModel;
 class AuthController extends BaseController
 {
     protected $user;
@@ -14,6 +14,7 @@ class AuthController extends BaseController
 {
     helper('form');
     $this->user = new UserModel();
+    $this->diskonModel = new DiskonModel();
 }
 
 public function login()
@@ -51,4 +52,6 @@ public function logout()
     session()->destroy();
     return redirect()->to('login');
 }
+
+
 }
