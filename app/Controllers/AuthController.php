@@ -33,6 +33,14 @@ public function login()
                     'isLoggedIn' => TRUE
                 ]);
 
+                 $diskonModel = new DiskonModel();
+                    $today = date('Y-m-d');
+
+                    $diskon = $diskonModel->where('tanggal', $today)->first();
+                    if ($diskon) {
+                        session()->set('diskon_nominal', $diskon['nominal']);
+                    }
+
                 return redirect()->to(base_url(''));
             } else {
                 session()->setFlashdata('failed', 'Username & Password Salah');
