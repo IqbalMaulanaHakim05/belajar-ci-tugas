@@ -8,17 +8,17 @@ use App\Models\TransactionDetailModel;
 
 class Home extends BaseController
 {
-    protected $Product;
-    protected $Transaction;
-    protected $Transaction_Detail;
+    protected $product;
+    protected $transaction;
+    protected $transaction_detail;
 
     function __construct()
     {
         helper('form');
         helper('number');
         $this->product = new ProductModel();
-        $this->Transaction = new TransactionModel();
-        $this->Transaction_Detail = new TransactionDetailModel();
+        $this->transaction = new TransactionModel();
+        $this->transaction_detail = new TransactionDetailModel();
     }
 
     public function index(): string
