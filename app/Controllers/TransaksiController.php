@@ -89,22 +89,35 @@ class TransaksiController extends BaseController
 
 public function getLocation()
 {
-		//keyword pencarian yang dikirimkan dari halaman checkout
     $search = $this->request->getGet('search');
 
-    $response = $this->client->request(
-        'GET', 
-        'https://rajaongkir.komerce.id/api/v1/destination/domestic-destination?search='.$search.'&limit=50', [
-            'headers' => [
-                'accept' => 'application/json',
-                'key' => $this->apiKey,
-            ],
-        ]
-    );
+    try {
+        $response = $this->client->request(
+            'GET',
+            'https://rajaongkir.komerce.id/api/v1/destination/domestic-destination?search=' . $search . '&limit=50',
+            [
+                'headers' => [
+                    'accept' => 'application/json',
+                    'key' => $this->apiKey,
+                ],
+            ]
+        );
 
-    $body = json_decode($response->getBody(), true); 
-    return $this->response->setJSON($body['data']);
+        $body = json_decode($response->getBody(), true);
+        return $this->response->setJSON($body['data']);
+    } catch (\GuzzleHttp\Exception\RequestException $e) {
+        log_message('error', 'RAJAONGKIR Error: ' . $e->getMessage());
+
+        // Jika ingin melihat isi body error dari API:
+        if ($e->hasResponse()) {
+            $errorBody = $e->getResponse()->getBody()->getContents();
+            return $this->response->setJSON(['error' => 'API gagal: ' . $errorBody]);
+        }
+
+        return $this->response->setJSON(['error' => 'Tidak dapat menghubungi API RajaOngkir.']);
+    }
 }
+
 
 public function getCost()
 { 
